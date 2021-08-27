@@ -32538,7 +32538,8 @@ App.propTypes = {
 var _default = App;
 exports.default = _default;
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","big.js":"../node_modules/big.js/big.js","./components/Form":"components/Form.jsx","./components/SignIn":"components/SignIn.jsx","./components/Messages":"components/Messages.jsx"}],"config.js":[function(require,module,exports) {
-const CONTRACT_NAME = "dev-1629705357221-65188437372237" || 'mtoan2193.testnet';
+// const CONTRACT_NAME = process.env.CONTRACT_NAME || 'mtoan2193.testnet';
+const CONTRACT_NAME = 'mtoan2193.testnet';
 
 function getConfig(env) {
   switch (env) {
@@ -32556,6 +32557,7 @@ function getConfig(env) {
     case 'production':
     case 'development':
     case 'testnet':
+      console.log(CONTRACT_NAME);
       return {
         networkId: 'testnet',
         nodeUrl: 'https://rpc.testnet.near.org',
@@ -48830,6 +48832,7 @@ __exportStar(require("./browser-connect"), exports);
 require("error-polyfill");
 
 },{"./key_stores/browser-index":"../node_modules/near-api-js/lib/key_stores/browser-index.js","./common-index":"../node_modules/near-api-js/lib/common-index.js","./browser-connect":"../node_modules/near-api-js/lib/browser-connect.js","error-polyfill":"../node_modules/error-polyfill/index.js"}],"index.js":[function(require,module,exports) {
+var process = require("process");
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -48868,8 +48871,11 @@ async function initContract() {
       accountId: walletConnection.getAccountId(),
       balance: (await walletConnection.account().state()).amount
     };
-  } // Initializing our contract APIs by contract name and configuration
+  }
 
+  console.log(process.env);
+  console.log(walletConnection);
+  console.log(123, nearConfig); // Initializing our contract APIs by contract name and configuration
 
   const contract = await new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
     // View methods are read-only – they don't modify the state, but usually return some value
@@ -48901,7 +48907,7 @@ window.nearInitPromise = initContract().then(({
     wallet: walletConnection
   }), document.getElementById('root'));
 });
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App":"App.js","./config.js":"config.js","near-api-js":"../node_modules/near-api-js/lib/browser-index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App":"App.js","./config.js":"config.js","near-api-js":"../node_modules/near-api-js/lib/browser-index.js","process":"../node_modules/process/browser.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -48929,7 +48935,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63111" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55413" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
