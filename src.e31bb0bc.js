@@ -32356,8 +32356,18 @@ function Form({
   }, /*#__PURE__*/_react.default.createElement("p", null, "Sign the guest book, ", currentUser.accountId, "!"), /*#__PURE__*/_react.default.createElement("p", {
     className: "highlight"
   }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "title"
+  }, "Title:"), /*#__PURE__*/_react.default.createElement("input", {
+    autoComplete: "off",
+    autoFocus: true,
+    id: "title",
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("p", {
+    className: "highlight"
+  }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "message"
-  }, "Message:"), /*#__PURE__*/_react.default.createElement("input", {
+  }, "message:"), /*#__PURE__*/_react.default.createElement("textarea", {
+    style: style.messageArea,
     autoComplete: "off",
     autoFocus: true,
     id: "message",
@@ -32379,6 +32389,15 @@ function Form({
   }, "Sign")));
 }
 
+const style = {
+  messageArea: {
+    width: '100%',
+    height: 300,
+    background: 'transparent',
+    color: 'white',
+    fontSize: '20pt'
+  }
+};
 Form.propTypes = {
   onSubmit: _propTypes.default.func.isRequired,
   currentUser: _propTypes.default.shape({
@@ -32478,14 +32497,16 @@ const App = ({
     const {
       fieldset,
       message,
-      donation
+      donation,
+      title
     } = e.target.elements;
     fieldset.disabled = true; // TODO: optimistically update page with new message,
     // update blockchain data in background
     // add uuid to each message, so we know which one is already known
 
     contract.addMessage({
-      text: message.value
+      title: message.value,
+      message: title.value
     }, BOATLOAD_OF_GAS, (0, _big.default)(donation.value || '0').times(10 ** 24).toFixed()).then(() => {
       contract.getMessages().then(messages => {
         setMessages(messages);
@@ -48832,7 +48853,6 @@ __exportStar(require("./browser-connect"), exports);
 require("error-polyfill");
 
 },{"./key_stores/browser-index":"../node_modules/near-api-js/lib/key_stores/browser-index.js","./common-index":"../node_modules/near-api-js/lib/common-index.js","./browser-connect":"../node_modules/near-api-js/lib/browser-connect.js","error-polyfill":"../node_modules/error-polyfill/index.js"}],"index.js":[function(require,module,exports) {
-var process = require("process");
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -48871,11 +48891,8 @@ async function initContract() {
       accountId: walletConnection.getAccountId(),
       balance: (await walletConnection.account().state()).amount
     };
-  }
+  } // Initializing our contract APIs by contract name and configuration
 
-  console.log(process.env);
-  console.log(walletConnection);
-  console.log(123, nearConfig); // Initializing our contract APIs by contract name and configuration
 
   const contract = await new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
     // View methods are read-only – they don't modify the state, but usually return some value
@@ -48907,7 +48924,7 @@ window.nearInitPromise = initContract().then(({
     wallet: walletConnection
   }), document.getElementById('root'));
 });
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App":"App.js","./config.js":"config.js","near-api-js":"../node_modules/near-api-js/lib/browser-index.js","process":"../node_modules/process/browser.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App":"App.js","./config.js":"config.js","near-api-js":"../node_modules/near-api-js/lib/browser-index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -48935,7 +48952,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55413" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65298" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
