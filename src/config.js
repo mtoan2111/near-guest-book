@@ -1,4 +1,5 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || 'guest-book.testnet';
+// const CONTRACT_NAME = process.env.CONTRACT_NAME || 'mtoan2193.testnet';
+const CONTRACT_NAME = 'mtoan2193.testnet'
 
 function getConfig(env) {
   switch(env) {
@@ -15,6 +16,7 @@ function getConfig(env) {
     case 'production':
     case 'development':
     case 'testnet':
+      console.log(CONTRACT_NAME);
       return {
         networkId: 'testnet',
         nodeUrl: 'https://rpc.testnet.near.org',
