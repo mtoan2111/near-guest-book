@@ -32538,7 +32538,7 @@ App.propTypes = {
 var _default = App;
 exports.default = _default;
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","big.js":"../node_modules/big.js/big.js","./components/Form":"components/Form.jsx","./components/SignIn":"components/SignIn.jsx","./components/Messages":"components/Messages.jsx"}],"config.js":[function(require,module,exports) {
-const CONTRACT_NAME = "dev-1629705357221-65188437372237" || 'guest-book.testnet';
+const CONTRACT_NAME = "dev-1629705357221-65188437372237" || 'mtoan2193.testnet';
 
 function getConfig(env) {
   switch (env) {
@@ -48929,7 +48929,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64878" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63111" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
